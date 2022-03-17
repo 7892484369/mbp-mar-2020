@@ -1,7 +1,7 @@
-pipeline {
+pipeline{
     agent any 
     tools {
-  maven 'maven3'
+          maven 'maven3'
           }
     stages{
         stage("Maven Build"){
@@ -9,10 +9,10 @@ pipeline {
                 branch 'develop'
             }
             steps{
-                sh "mvn clean package"
+              sh "mvn clean package"
             }
         }
-    }
+        
         stage("Sonar Analysis"){
             when {
                 branch 'develop'
@@ -43,12 +43,12 @@ pipeline {
                 branch 'develop'
             }
             steps{
-                echo "Deploy to uat..."
+                echo "Deploying to uat..."
             }
        }
        stage("Deploy to Prod"){
             when {
-                branch 'develop'
+                branch 'master'
             }
             steps{
                 echo "Deploying to production..."
