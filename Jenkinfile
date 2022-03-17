@@ -2,7 +2,7 @@ pipeline{
     agent any 
     tools {
           maven 'maven3'
-          }
+     }
     stages{
         stage("Maven Build"){
             when {
@@ -12,7 +12,7 @@ pipeline{
               sh "mvn clean package"
             }
         }
-        
+
         stage("Sonar Analysis"){
             when {
                 branch 'develop'
@@ -26,9 +26,10 @@ pipeline{
                 branch 'develop'
             }
             steps{
-                echo "upload war file to nexus "
+                echo "upload war file to nexus"
             }
         }
+
        stage("Deploy to dev and test"){
             when {
                 branch 'develop'
@@ -38,9 +39,9 @@ pipeline{
                 echo "Deploying to test..."
             }
        }
-       stage("Deploy to uat"){
+       stage("Deploy to UAT"){
             when {
-                branch 'develop'
+                branch 'uat'
             }
             steps{
                 echo "Deploying to uat..."
