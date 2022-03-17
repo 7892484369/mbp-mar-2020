@@ -9,5 +9,44 @@ pipeline {
                 sh "mvn clean package"
             }
         }
-    }
-}
+        stage("Sonar Analysis"){
+            when {
+                branch 'develop'
+            }
+            steps{
+                echo "Sonar Analysis"
+           }
+           }
+           stage("upload to Nexus"){
+            when {
+                branch 'develop'
+            }
+            steps{
+                echo "upload war file to nexus "
+            }
+           }
+       stage("Deploy to dev and test"){
+            when {
+                branch 'develop'
+            }
+            steps{
+                echo "Deploying to development..."
+                echo "Deploying to test..."
+            }
+       }
+       stage("Deploy to uat"){
+            when {
+                branch 'develop'
+            }
+            steps{
+                echo "Deploy to uat..."
+            }
+       }
+       stage("Deploy to Prod"){
+            when {
+                branch 'develop'
+            }
+            steps{
+                echo "Deploying to production..."
+                }
+       }
